@@ -16,9 +16,9 @@ class UserController {
   }
 
   async index(req, res) {
-    console.log(req.params)
+    console.log(req.query)
     try {
-      const users = await SearchUserByNameAndEmailService.execute(req.params)
+      const users = await SearchUserByNameAndEmailService.execute(req.query)
       return res.status(200).json(users)
     } catch (error) {
       console.log(error)

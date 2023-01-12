@@ -33,16 +33,7 @@ class CreateUserService {
       throw responseError
     }
 
-    // const userEmail = await this.userRepository.getByEmail(data.email)
-    // if (userEmail) {
-    //   const responseError = new Error()
-    //   responseError.status = 400
-    //   responseError.response = 'Email já esta sendo utilizado!'
-    //   throw responseError
-    // }
-
     const { ...rest } = data
-    console.log(rest)
     const user = await this.userRepository.create(rest)
     return user
   }

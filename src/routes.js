@@ -10,10 +10,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/user', UserController.store)
-router.get('/user/users', UserController.index)
 
-router.get('/user/search/?name=:name&?email=:email', UserController.index)
-router.get('/user/search/?email=:email', UserController.index)
-router.get('/user/search/?name=:name', UserController.index)
+router.get('/user', UserController.index)
 
 export { router }

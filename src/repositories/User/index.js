@@ -11,8 +11,18 @@ class UserRepository {
     })
   }
 
-  async getAll() {
-    return prisma.users.findMany()
+  async getAll({ page }) {
+    if (!page) {
+      const error = new Error()
+      error.status = 400
+      error.response = 'Você deve especificar uma página.'
+      throw error
+    }
+
+    return prisma.users.findMany({
+      skip: 20 * (page - 1),
+      take: 20,
+    })
   }
 
   async deleteByEmail(email) {
@@ -23,34 +33,23 @@ class UserRepository {
     })
   }
 
-  async getSearchNameAndEmail(params) {
-    console.log(params)
-
-    if (!params.email) {
-      return prisma.users.findMany({
-        where: {
-          name: { contains: params.name },
-        },
-      })
-    } else if (!params.name) {
-      return prisma.users.findMany({
-        where: {
-          email: { contains: params.email },
-        },
-      })
-    } else {
-      return prisma.users.findMany({
-        where: {
-          OR: [
-            { name: { contains: params.name } },
-            { email: { contains: params.email } },
-          ],
-        },
-      })
+  async getSearchNameAndEmail({ name, email }) {
+    const whereCondition = {}
+    console.log(name, email)
+    if (email) {
+      whereCondition.email = { contains: email }
     }
+
+    if (name) {
+      whereCondition.name = { contains: name }
+    }
+
+    return prisma.users.findMany({
+      where: whereCondition,
+    })
   }
 
-  async updateByEmail(id, name, email, phone) {
+  async updateByEmail({ id, name, email, phone }) {
     return prisma.user.update({
       where: {
         id,

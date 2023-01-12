@@ -5,13 +5,20 @@ class SearchUserByNameOrRAService {
     this.userRepository = new UserRepository()
   }
 
-  async execute(params) {
-    console.log(params)
+  async execute(query) {
+    console.log(query)
     let users
-    if (!params.name && !params.email) {
-      users = await this.userRepository.getAll()
+    if (!query.name && !query.email) {
+      users = await this.userRepository.getAll(query)
     } else {
-      users = await this.userRepository.getSearchNameAndEmail(params)
+      users = await this.userRepository.getSearchNameAndEmail(query)
+    }
+
+    if (users.length == 0) {
+      const error = new Error()
+      error.status = 204
+      error.response = 'Nenhum usuário com essas especificações.'
+      throw error
     }
 
     return users
