@@ -37,23 +37,31 @@
 
 ---
 
-### Tecnologias
+## Documentação da API
+Documentação realizada pelo swagger.
+- Link: [http://localhost:3000/api](http://localhost:3000/api)
+
+---
+
+## Tecnologias
 
 - Node.js
 - Prisma
 - Express
 - Docker
 - PostgreSQL
+- Swagger
 
 ---
 
-### Melhorias
+## Melhorias
 
 - Implementação de testes
+- Implementar mais funções para gerenciamento dos usuários
 
 ---
 
-### 🦸 Autor
+## 🦸 Autor
 
 <table><tr>
 
