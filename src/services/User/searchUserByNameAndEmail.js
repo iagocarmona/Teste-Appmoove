@@ -6,7 +6,6 @@ class SearchUserByNameOrRAService {
   }
 
   async execute(query) {
-    console.log(query)
     let users
     if (!query.name && !query.email) {
       users = await this.userRepository.getAll(query)

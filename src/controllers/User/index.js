@@ -16,7 +16,6 @@ class UserController {
   }
 
   async index(req, res) {
-    console.log(req.query)
     try {
       const users = await SearchUserByNameAndEmailService.execute(req.query)
       return res.status(200).json(users)

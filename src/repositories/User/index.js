@@ -25,17 +25,8 @@ class UserRepository {
     })
   }
 
-  async deleteByEmail(email) {
-    return prisma.users.deleteMany({
-      where: {
-        email,
-      },
-    })
-  }
-
   async getSearchNameAndEmail({ name, email }) {
     const whereCondition = {}
-    console.log(name, email)
     if (email) {
       whereCondition.email = { contains: email }
     }
@@ -46,19 +37,6 @@ class UserRepository {
 
     return prisma.users.findMany({
       where: whereCondition,
-    })
-  }
-
-  async updateByEmail({ id, name, email, phone }) {
-    return prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        name,
-        email,
-        phone,
-      },
     })
   }
 }
